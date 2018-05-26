@@ -29,7 +29,7 @@
 
 
 
-					        <nav class="level shot-analytics">
+					        <nav class="level tweeet-analytics">
 					          <div class="level-left"></div>
 					          <div class="level-right">
 					            
@@ -39,11 +39,27 @@
 					                 <%= tweeet.comments.count %>
 					              <% end %>
 					            </div>
-					            <div class="level-item heart data">
-					              <%= link_to '' do %>
-					                <span class="icon"><i class="fa fa-heart"></i></span>
-					                 0
+					            <div class="level-item likes">
+					              <% if user_signed_in? %>
+					                
+					                <% if current_user.liked? tweeet %>
+					                  <%= link_to unlike_tweeet_path(tweeet), method: :put, class: "unlike_shot" do %>
+					                    <span class="icon"><i class="fa fa-heart has-text-primary"></i></span>
+					                    <span class="vote_count"><%= tweeet.get_likes.size %></span>
+					                  <% end %>
+					                <% else %>
+					                  <%= link_to like_tweeet_path(tweeet), method: :put, class: "like_shot" do %>
+					                    <span class="icon"><i class="fa fa-heart"></i></span>
+					                    <span class="vote_count"><%= tweeet.get_likes.size %></span>
+					                  <% end %>
+					                <% end %>
+					              <% else %>
+					                  <%= link_to like_tweeet_path(tweeet), method: :put, class: "like_shot" do %>
+					                    <span class="icon"><i class="fa fa-heart"></i></span>
+					                    <span class="vote_count"><%= tweeet.get_likes.size %></span>
+					                  <% end %>
 					              <% end %>
+
 					            </div>
 					          </div>
 						    </nav>
