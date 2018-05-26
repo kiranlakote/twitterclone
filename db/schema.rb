@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_091044) do
+ActiveRecord::Schema.define(version: 2018_05_26_082850) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string "name"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "tweeet_id"
+    t.integer "user_id"
+  end
 
   create_table "tweeets", force: :cascade do |t|
     t.text "tweeet"
@@ -21,5 +30,19 @@ ActiveRecord::Schema.define(version: 2018_05_25_091044) do
 
 # Could not dump table "users" because of following StandardError
 #   Unknown type 'strings' for column 'name'
+
+  create_table "votes", force: :cascade do |t|
+    t.string "votable_type"
+    t.integer "votable_id"
+    t.string "voter_type"
+    t.integer "voter_id"
+    t.boolean "vote_flag"
+    t.string "vote_scope"
+    t.integer "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope"
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope"
+  end
 
 end

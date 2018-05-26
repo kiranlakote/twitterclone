@@ -1,5 +1,5 @@
 class TweeetsController < ApplicationController
-  before_action :set_tweeet, only: [:show, :edit, :update, :destroy]
+  before_action :set_tweeet, only: [:show, :edit, :update, :destroy, :like, :unlike ]
   before_action :authenticate_user!, except: [:index, :show]
   # GET /tweeets
   # GET /tweeets.json
@@ -62,6 +62,21 @@ class TweeetsController < ApplicationController
     end
   end
 
+  def like
+    @tweeet.liked_by current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+      format.json { render layout:false }
+    end
+  end
+
+  def unlike
+     @tweeet.unliked_by current_user
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+      format.json { render layout:false }
+    end
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tweeet

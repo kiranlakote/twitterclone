@@ -31,6 +31,7 @@ gem 'bulma-rails', '~> 0.7.1'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'devise'
+gem 'acts_as_votable', '~> 0.11.1'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

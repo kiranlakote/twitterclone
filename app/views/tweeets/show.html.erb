@@ -1,9 +1,42 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Tweeet:</strong>
-  <%= @tweeet.tweeet %>
-</p>
 
-<%= link_to 'Edit', edit_tweeet_path(@tweeet) %> |
-<%= link_to 'Back', tweeets_path %>
+
+
+
+
+<div class="section">
+	<div class="container">
+		<div class="columns is-centered">
+			<div class="column is-half">
+				<h1 class="title">Showing Tweeet</h1>
+				<%= @tweeet.tweeet %>
+			</div>
+		</div>
+		<div class="columns is-centered">
+			<div class="column is-half">
+				<p class="control">
+					<%= link_to 'Edit', edit_tweeet_path(@tweeet) %> |
+					<%= link_to 'Back', tweeets_path %>
+				</p>
+			</div>
+		</div>
+		<div class="columns is-centered">
+			<div class="column is-half">
+				<section class="comments">
+					<h2 class="subtitle_is-5"><%=  pluralize(@tweeet.comments.count, 'Comment') %></h2>
+					<%= render @tweeet.comments %>
+					<hr />
+						<% if user_signed_in? %>
+							<div class="comment-form">
+								<h3 class="subtitle is-3">Leave a reply</h3>
+								<%= render 'comments/form' %>
+							</div>
+						<% else %>
+							<div class="content"><%= link_to 'Sign in', new_user_session_path %> to leave a comment.</div>
+						<% end %>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
+
